@@ -1,0 +1,10 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api
+spec:
+  tls:
+    - hosts:
+        - api.index-it.app
+  rules:
+    - host: "api.index-it.app"

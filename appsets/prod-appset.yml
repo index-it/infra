@@ -12,6 +12,8 @@ spec:
         revision: HEAD
         directories:
           - path: apps/*/envs/prod
+          - path: secrets/*
+            exclude: true
   template:
     metadata:
       name: "{{index .path.segments 1}}-{{index .path.segments 3}}"

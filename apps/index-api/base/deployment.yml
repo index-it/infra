@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: index-api
+  name: api
 spec:
   replicas: 1
   selector:
@@ -13,13 +13,17 @@ spec:
         app: index-api
     spec:
       containers:
-        - name: index-api
+        - name: api
           image: eu.gcr.io/index-352608/index-api-main:latest
           ports:
             - containerPort: 80
           envFrom:
             - configMapRef:
                 name: index-api-config
+          volumeMounts:
+            - name: gcp-service-account
+              mountPath: /etc/index-api/secrets
+              readOnly: true
           startupProbe:
             httpGet:
               path: /kube/startup
@@ -39,13 +43,7 @@ spec:
               port: 80
             periodSeconds: 10
             failureThreshold: 3
-          volumeMounts:
-            - name: gcp-service-account
-              mountPath: /etc/index-api/secrets
-              readOnly: true
       volumes:
         - name: gcp-service-account
           secret:
             secretName: gcp-service-account
-      imagePullSecrets:
-        - name: gcr-json-key
