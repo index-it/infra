@@ -7,4 +7,4 @@ helmCharts:
     version: 22.0.7
     releaseName: redis
     namespace: index-redis-prod
-    valuesFile: pg-values.yml
+    valuesFile: redis-values.yml

@@ -8,3 +8,12 @@ spec:
         - api.index-it.app
   rules:
     - host: "api.index-it.app"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: api
+                port:
+                  number: 80
