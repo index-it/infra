@@ -1,0 +1,28 @@
+global:
+  defaultStorageClass: "longhorn"
+
+image:
+  repository: "redis"
+  tag: "8.6"
+
+architecture: standalone
+clusterDomain: gport.giuliopime.dev
+
+auth:
+  existingSecret: "redis-auth"
+  existingSecretPasswordKey: "password"
+
+commonConfiguration: |-
+  save "3600 1 300 100 60 10000"
+
+master:
+  resources:
+    requests:
+      cpu: 0.2
+      memory: 512Mi
+    limits:
+      memory: 4Gi
+  persistence:
+    size: 10Gi
+replica:
+  replicaCount: 0
