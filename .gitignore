@@ -1,3 +1,5 @@
 .idea
 **/secrets/*.yaml
+**/secrets/*.yml
 !**/secrets/*.template.yaml
+!**/secrets/*.template.yml
