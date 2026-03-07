@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: index-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: index-api
+  template:
+    metadata:
+      labels:
+        app: index-api
+    spec:
+      containers:
+        - name: index-api
+          image: eu.gcr.io/index-352608/index-api-main:latest
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: index-api-config
+          startupProbe:
+            httpGet:
+              path: /kube/startup
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /kube/readiness
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /kube/liveness
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3
+          volumeMounts:
+            - name: gcp-service-account
+              mountPath: /etc/index-api/secrets
+              readOnly: true
+      volumes:
+        - name: gcp-service-account
+          secret:
+            secretName: gcp-service-account
+      imagePullSecrets:
+        - name: gcr-json-key

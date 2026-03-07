@@ -1,0 +1,11 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: index-api
+spec:
+  template:
+    spec:
+      containers:
+        - name: index-api
+          image: eu.gcr.io/index-352608/index-api-main:0.1.9
