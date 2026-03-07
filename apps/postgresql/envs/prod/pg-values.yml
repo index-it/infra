@@ -1,0 +1,19 @@
+global:
+  defaultStorageClass: "longhorn"
+
+image:
+  repository: "postgres"
+  tag: "18.3"
+
+architecture: standalone
+clusterDomain: gport.giuliopime.dev
+
+auth:
+  existingSecret: "postgresql-auth"
+  secretKeys:
+    adminPasswordKey: "password"
+
+# TODO: Add resource limits (?)
+primary:
+  persistence:
+    size: 15Gi
