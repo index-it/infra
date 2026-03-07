@@ -33,3 +33,9 @@ cat ~/.docker/config.json | base64 -w 0
 cat key.json | base64 -w 0
 ```
 - Insert the output of the above command into the `gcp-service-account-secret.yml` file in the `data.key.json` key
+
+### ConfigMap with env variables
+Currently, env variables are handled manually, run the following to add the to the cluster:
+```shell
+kubectl create configmap config --from-env-file=.env -n index-api-prod
+```
