@@ -46,14 +46,22 @@ find "$SEARCH_DIR" -type d -path "*/envs/*/secrets" | while read -r SECRETS_DIR;
         kubeseal -f "$SECRET_FILE" -w "$SEALED_TMP"
         echo "Sealed $SECRET_FILE"
 
-        # ── ENV copy: keep only apiVersion, kind, metadata.name, spec.encryptedData ──
+        # ── ENV copy: keep only apiVersion, kind, metadata.name, spec.encryptedData
+        #             and spec.template.metadata.namespace (no other template metadata) ──
         ENV_OUT="$ENV_DIR/${FILE_BASENAME}-secret-sealed.yml"
         yq '
           {
             "apiVersion": .apiVersion,
             "kind": .kind,
             "metadata": {"name": .metadata.name},
-            "spec": {"encryptedData": .spec.encryptedData}
+            "spec": {
+              "encryptedData": .spec.encryptedData,
+              "template": {
+                "metadata": {
+                  "namespace": .spec.template.metadata.namespace
+                }
+              }
+            }
           }
         ' "$SEALED_TMP" > "$ENV_OUT"
         # Prepend YAML document separator
@@ -61,11 +69,13 @@ find "$SEARCH_DIR" -type d -path "*/envs/*/secrets" | while read -r SECRETS_DIR;
         echo "  -> env copy:  $ENV_OUT"
 
         # ── BASE copy: remove spec.encryptedData, remove metadata.namespace,
+        #              remove spec.template.metadata.namespace,
         #              add argocd sync-wave annotation ──
         BASE_OUT="$BASE_OUT_DIR/${FILE_BASENAME}-secret-sealed.yml"
         yq '
           del(.spec.encryptedData) |
           del(.metadata.namespace) |
+          del(.spec.template.metadata.namespace) |
           .metadata.annotations["argocd.argoproj.io/sync-wave"] = "-1"
         ' "$SEALED_TMP" > "$BASE_OUT"
         sed -i '1s/^/---\n/' "$BASE_OUT"
