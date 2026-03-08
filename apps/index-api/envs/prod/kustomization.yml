@@ -3,10 +3,10 @@ kind: Kustomization
 
 resources:
   - ../../base
+  - docker-config-secret-sealed.yml
+  - gcp-service-account-secret-sealed.yml
 
 patches:
   - path: ingress.yml
   - path: replicas.yml
   - path: version.yml
-  - path: docker-config-secret-sealed.yml
-  - path: gcp-service-account-secret-sealed.yml

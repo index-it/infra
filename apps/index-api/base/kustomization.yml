@@ -5,5 +5,3 @@ resources:
   - ingress.yml
   - service.yml
   - deployment.yml
-  - docker-config-secret-sealed.yml
-  - gcp-service-account-secret-sealed.yml
