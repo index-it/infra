@@ -2,6 +2,7 @@ global:
   defaultStorageClass: "longhorn"
 
 image:
+  registry: "docker.io"
   repository: "postgres"
   tag: "18.3"
 
