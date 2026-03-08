@@ -15,6 +15,31 @@ cat ~/.docker/config.json | base64 -w 0
 ```
 - Insert the output of the above command into the `docker-config-secret.yml` file in the `data..dockerconfigjson` key
 
+To use GHCR (GitHub Container Registry) instead:
+- Create a service account in GitHub with the following permissions:
+  - read:packages
+- Run
+```shell
+echo Giuliopime:your_github_token | base64
+```
+- Create a docker config file
+```json
+{
+    "auths":
+    {
+        "ghcr.io":
+            {
+                "auth":"the_output_of_the_above_command"
+            }
+    }
+}
+```
+- encode the docker file
+```shell
+cat the-created-docker-config-file | base64
+```
+- Insert the output of the above command into the `docker-config-secret.yml` file in the `data..dockerconfigjson` key
+
 ### GCP service account for index-api
 - Create a service account in GCP with the following permissions:
   - BigQuery Data Editor
