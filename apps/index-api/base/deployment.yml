@@ -48,4 +48,4 @@ spec:
           secret:
             secretName: gcp-service-account
       imagePullSecrets:
-        - name: gcp-service-account
+        - name: docker-config
