@@ -10,4 +10,4 @@ patches:
   - path: ingress.yml
   - path: replicas.yml
   - path: version.yml
-  - path: resources.yml
+#  - path: resources.yml
