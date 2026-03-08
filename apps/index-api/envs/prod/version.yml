@@ -8,4 +8,4 @@ spec:
     spec:
       containers:
         - name: api
-          image: eu.gcr.io/index-352608/index-api-main:0.1.9
+          image: eu.gcr.io/index-352608/index-api-main:latest
