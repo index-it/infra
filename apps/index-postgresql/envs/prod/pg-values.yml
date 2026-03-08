@@ -1,11 +1,6 @@
 global:
   defaultStorageClass: "longhorn"
 
-image:
-  registry: "docker.io"
-  repository: "postgres"
-  tag: "18.3"
-
 architecture: standalone
 clusterDomain: gport.giuliopime.dev
 
