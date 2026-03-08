@@ -46,14 +46,14 @@ find "$SEARCH_DIR" -type d -path "*/envs/*/secrets" | while read -r SECRETS_DIR;
         kubeseal -f "$SECRET_FILE" -w "$SEALED_TMP"
         echo "Sealed $SECRET_FILE"
 
-        # ── ENV copy: keep only apiVersion, kind, metadata.name, spec.encryptedData
+        # ── ENV copy: keep only apiVersion, kind, metadata.name, metadata.namespace, spec.encryptedData
         #             and spec.template.metadata.namespace (no other template metadata) ──
         ENV_OUT="$ENV_DIR/${FILE_BASENAME}-secret-sealed.yml"
         yq '
           {
             "apiVersion": .apiVersion,
             "kind": .kind,
-            "metadata": {"name": .metadata.name},
+            "metadata": {"name": .metadata.name, "namespace": .metadata.namespace},
             "spec": {
               "encryptedData": .spec.encryptedData,
               "template": {
