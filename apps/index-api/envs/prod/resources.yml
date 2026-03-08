@@ -1,0 +1,18 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  template:
+    spec:
+      containers:
+        - name: api
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              # cpu: {{ .Values.resources.limits.cpu }} we don't want to limit the cpu
+              # see https://home.robusta.dev/blog/stop-using-cpu-limits
+              memory: 512Mi
