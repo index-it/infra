@@ -8,4 +8,4 @@ spec:
     spec:
       containers:
         - name: api
-          image: eu.gcr.io/index-352608/index-api-main@sha256:6b224918a4324d646e50e21096d47192083bd17da1098c0cb48b4c90bb195689
+          image: eu.gcr.io/index-352608/index-api-main@sha256:b289094bfb50092c3dd1a0eeda1c9d46aa391e0cb52efc3c566a708d0c916ebb
