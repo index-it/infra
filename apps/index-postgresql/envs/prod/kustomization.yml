@@ -1,6 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+resources:
+  - postgresql-auth-secret-sealed.yml
+
 helmCharts:
   - name: postgresql
     repo: https://charts.bitnami.com/bitnami

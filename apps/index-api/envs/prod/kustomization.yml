@@ -8,3 +8,5 @@ patches:
   - path: ingress.yml
   - path: replicas.yml
   - path: version.yml
+  - path: docker-config-secret-sealed.yml
+  - path: gcp-service-account-secret-sealed.yml
