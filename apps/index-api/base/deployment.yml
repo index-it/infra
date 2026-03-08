@@ -47,3 +47,5 @@ spec:
         - name: gcp-service-account
           secret:
             secretName: gcp-service-account
+      imagePullSecrets:
+        - name: gcp-service-account
