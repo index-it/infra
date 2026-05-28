@@ -8,4 +8,4 @@ spec:
     spec:
       containers:
         - name: api
-          image: ghcr.io/index-it/index_api:0.1.10
+          image: ghcr.io/index-it/api:0.1.12
