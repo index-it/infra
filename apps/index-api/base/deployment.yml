@@ -28,6 +28,7 @@ spec:
             httpGet:
               path: /kube/startup
               port: 80
+            timeoutSeconds: 5
             initialDelaySeconds: 5
             periodSeconds: 5
             failureThreshold: 30
@@ -35,12 +36,14 @@ spec:
             httpGet:
               path: /kube/readiness
               port: 80
+            timeoutSeconds: 5
             periodSeconds: 10
             failureThreshold: 3
           livenessProbe:
             httpGet:
               path: /kube/liveness
               port: 80
+            timeoutSeconds: 5
             periodSeconds: 10
             failureThreshold: 3
       volumes:
