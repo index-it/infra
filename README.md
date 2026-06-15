@@ -1,3 +1,8 @@
+# Index IAC
+Index infrastructure as code repository which contains all ArgoCD configs to get Index backend services up and running on a k8s cluster.  
+
+The code for the kubernetes cluster setup can be found [in this repository](https://github.com/Giuliopime/gport).  
+
 #### secrets management
 Secrets cannot be commited to git, for this reason we use [sealed secrets](https://github.com/bitnami-labs/sealed-secrets)
 
