@@ -5,6 +5,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod-dns
 spec:
+  ingressClassName: traefik
   tls:
     - hosts:
         - api.index-it.app
